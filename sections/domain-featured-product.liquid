@@ -1,0 +1,31 @@
+<script src="{{ 'domain-product-card.js' | asset_url }}" defer="defer"></script>
+
+{% assign product = all_products[section.settings.product] %}
+<div class='domain-featured-product'>
+  <div class='container flex justify-center my-8 mx-auto'>
+    {% render 'domain-product-card', product: product %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Domaine featured product",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Featured product"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Domaine featured product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,45 @@
+<domain-product-card class='dpc'>
+   <div class='dpc__inner relative'>
+       {% if product.price < product.compare_at_price %}
+           <div class='dpc__sale-badge border border-red-600 font-medium text-3xl text-red-600 absolute rounded-full p-1 top-2 left-2 z-10'>On Sale!</div>
+       {% endif %}
+       <div class='dpc__image-wrapper border border-gray-200 rounded-2xl overflow-hidden relative' style='background: url({{ product.variants.first.metafields.custom.secondary_image |  img_url: '315x' }})'>
+           <img class='dpc__primary-image hover:opacity-0' src='{{ product.variants.first.image | img_url: '315x' }}' alt='{{ product.title }} - primary' />
+       </div>
+       <div class='dpc__content pt-2'>
+           <div class='dpc__swatches py-2'>
+               <ul class='flex gap-2'>
+                   {% for option in product.options_with_values %}
+                       {% if option.name == 'Color' %}
+                           {%- assign option_index = forloop.index0 %}
+                           {% for value in option.values %}
+                               {% for variant in product.variants %}
+                                   {% if variant.options[option_index] == value %}
+                                       {%- assign current_variant = variant -%}
+                                   {% endif %}
+                               {% endfor %}
+                               <a
+                                   href="#"
+                                   class='dpc__swatch rounded-full p-[1px] border-blue-800 {% if forloop.first %}border{% endif %}'
+                                   data-primary-image='{{ current_variant.image | img_url: '315x' }}'
+                                   data-secondary-image='{{ current_variant.metafields.custom.secondary_image | img_url: '315x' }}'
+                               >
+                                  <li class='rounded-full p-2 size-[20px] block' style='background-color: {{ value | downcase }};'>
+                                  </li>
+                               </a>
+                           {% endfor %}
+                       {% endif %}
+                   {% endfor %}
+               </ul>
+           </div>
+           <p class='dpc__vendor text-xl'>{{ product.vendor }}</p>
+           <p class='dpc__title font-medium text-blue-800'>{{ product.title }}</p>
+           <div class='dpc__prices inline-flex'>
+               {% if product.price < product.compare_at_price %}
+                   <p class='dpc__original-price line-through pr-2'>{{ product.compare_at_price | money }}</p>
+               {% endif %}
+               <p class='dpc__price {% if product.price < product.compare_at_price %}text-red-600{% endif %}'>{{ product.price | money }}</p>
+           </div>
+       </div>
+   </div>
+</domain-product-card>
