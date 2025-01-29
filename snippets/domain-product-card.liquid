@@ -36,9 +36,9 @@
            <p class='dpc__title font-medium text-blue-800'>{{ product.title }}</p>
            <div class='dpc__prices inline-flex'>
                {% if product.price < product.compare_at_price %}
-                   <p class='dpc__original-price line-through pr-2'>{{ product.compare_at_price | money }}</p>
+                   <p class='dpc__original-price line-through pr-2 text-[14px]'>{{ product.compare_at_price | money }}</p>
                {% endif %}
-               <p class='dpc__price {% if product.price < product.compare_at_price %}text-red-600{% endif %}'>{{ product.price | money }}</p>
+               <p class='dpc__price text-[14px] {% if product.price < product.compare_at_price %}text-red-600{% endif %}'>{{ product.price | money }}</p>
            </div>
        </div>
    </div>
