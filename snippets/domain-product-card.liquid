@@ -1,7 +1,7 @@
 <domain-product-card class='dpc'>
    <div class='dpc__inner relative'>
        {% if product.price < product.compare_at_price %}
-           <div class='dpc__sale-badge border border-red-600 font-medium text-3xl text-red-600 absolute rounded-full p-1 top-2 left-2 z-10'>On Sale!</div>
+           <div class='dpc__sale-badge border border-red-600 font-medium text-3xl text-red-600 absolute rounded-full py-1 px-2 top-2 left-2 z-10'>On Sale!</div>
        {% endif %}
        <div class='dpc__image-wrapper border border-gray-200 rounded-2xl overflow-hidden relative' style='background: url({{ product.variants.first.metafields.custom.secondary_image |  img_url: '315x' }})'>
            <img class='dpc__primary-image hover:opacity-0' src='{{ product.variants.first.image | img_url: '315x' }}' alt='{{ product.title }} - primary' />
@@ -32,7 +32,7 @@
                    {% endfor %}
                </ul>
            </div>
-           <p class='dpc__vendor text-xl'>{{ product.vendor }}</p>
+           <p class='dpc__vendor text-[14px]'>{{ product.vendor }}</p>
            <p class='dpc__title font-medium text-blue-800'>{{ product.title }}</p>
            <div class='dpc__prices inline-flex'>
                {% if product.price < product.compare_at_price %}
