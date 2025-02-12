@@ -4,9 +4,11 @@ class DomainProductCard extends HTMLElement {
     this.imageWrapper = this.querySelector('.dpc__image-wrapper')
     this.mainImage = this.querySelector('.dpc__primary-image')
     this.swatches = this.querySelectorAll('.dpc__swatch')
+    this.atcButton = this.querySelector('.dpc__atc')
     this.swatches.forEach((swatch) => {
       swatch.addEventListener('click', this.handleSwatchClick.bind(this))
     })
+    this.atcButton.addEventListener('click', this.addToCart.bind(this))
   }
 
   handleSwatchClick(event) {
@@ -21,6 +23,33 @@ class DomainProductCard extends HTMLElement {
     let secondaryImage = event.currentTarget.dataset.secondaryImage
     this.mainImage.src = primaryImage
     this.imageWrapper.style.backgroundImage = `url(${secondaryImage})`
+
+    // Change variant id on atc
+    let variantId = event.currentTarget.dataset.variantId;
+    this.atcButton.dataset.variantId = variantId
+
+  }
+
+  addToCart(event) {
+    console.log('add to cart', event)
+    const url = "/cart/add.js"
+    let payload = {
+      items: [
+        quantity: 1,
+        id: event.currentTarget.dataset.variantId
+      ]
+    }
+    fetch(url, {
+      method: "POST",
+      headers: {
+        contentType: "json"
+      },
+      body: JSON.stringify(payload)
+    })
+    .then((resp) => resp.json())
+    .then((data) => {
+      console.log(data)
+    })
   }
 }
 
