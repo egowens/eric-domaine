@@ -43,7 +43,7 @@ class DomainProductCard extends HTMLElement {
     fetch(url, {
       method: "POST",
       headers: {
-        contentType: "json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(payload)
     })
