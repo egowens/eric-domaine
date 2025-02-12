@@ -27,16 +27,18 @@ class DomainProductCard extends HTMLElement {
     // Change variant id on atc
     let variantId = event.currentTarget.dataset.variantId;
     this.atcButton.dataset.variantId = variantId
-
   }
 
   addToCart(event) {
     console.log('add to cart', event)
+    let variantId = event
     const url = "/cart/add.js"
     let payload = {
       items: [
-        quantity: 1,
-        id: event.currentTarget.dataset.variantId
+        {
+          quantity: 1,
+          id: event.currentTarget.dataset.variantId
+        }
       ]
     }
     fetch(url, {
