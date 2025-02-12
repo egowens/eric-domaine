@@ -36,7 +36,7 @@ class DomainProductCard extends HTMLElement {
       items: [
         {
           quantity: 1,
-          id: event.currentTarget.dataset.variantId
+          id: parseInt(event.currentTarget.dataset.variantId)
         }
       ]
     }
