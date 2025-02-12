@@ -31,7 +31,6 @@ class DomainProductCard extends HTMLElement {
 
   addToCart(event) {
     console.log('add to cart', event)
-    let variantId = event
     const url = "/cart/add.js"
     let payload = {
       items: [
@@ -51,6 +50,9 @@ class DomainProductCard extends HTMLElement {
     .then((resp) => resp.json())
     .then((data) => {
       console.log(data)
+    })
+    .catch((error) => {
+      console.error('atc error: ', error)
     })
   }
 }
