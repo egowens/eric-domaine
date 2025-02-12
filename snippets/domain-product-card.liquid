@@ -21,6 +21,7 @@
                                <a
                                    href="#"
                                    class='dpc__swatch rounded-full p-[1px] border-blue-800 {% if forloop.first %}border{% endif %}'
+                                   data-variant-id='{{ current_variant.id }}'
                                    data-primary-image='{{ current_variant.image | img_url: '315x' }}'
                                    data-secondary-image='{{ current_variant.metafields.custom.secondary_image | img_url: '315x' }}'
                                >
@@ -39,6 +40,9 @@
                    <p class='dpc__original-price line-through pr-2 text-[14px]'>{{ product.compare_at_price | money }}</p>
                {% endif %}
                <p class='dpc__price text-[14px] {% if product.price < product.compare_at_price %}text-red-600{% endif %}'>{{ product.price | money }}</p>
+           </div>
+           <div class='dpc__atc-wrapper'>
+               <button class='button btn dpc__atc' id='product{{ id }}Atc' data-variant-id='{{ product.selected_or_first_available_variant.id }}'>Add to cart</button>
            </div>
        </div>
    </div>
